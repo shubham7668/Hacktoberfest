@@ -1,47 +1,89 @@
-## Rules  
+# 🎉 Welcome to Hacktoberfest 2025  
 
-**1)NO DSA CODES WILL BE ALLOWED**  
-Alternative ->   
-2)Create a page using HTML,CSS,JavaScript (If you are new to open source).  
-                 OR   
-2)You can contribute in projects of your choice whether it is based on    
+## 🌟 Everyone is Welcome!  
+Hacktoberfest is all about celebrating open source, collaboration, and learning by contributing to real-world projects.
 
-   •ANDROID  
-   •WEB DEV  
-   •MACHINE LEARNING  
-   •ROBOTICS  
-   •PYTHON  
-   •Any techstack(But make sure it is worthy enough!)
+> 💬 **Quantity is fun, but quality is key.**  
+> 💡 **Short-term action, long-term impact.**
 
-3)Add snapshots or **Deployed link** of working project .    
-4)Make sure follow [Shubham](https://github.com/shubham7668) & star the repo.     
+Contribute anything meaningful to start with 🙌  
+
+---
+
+## 🚀 How to Participate  
+
+1. 🗓️ **Register** anytime between **September 15 and October 31** on [Hacktoberfest.com](https://hacktoberfest.com/).  
+2. 🌍 **Find repositories** on GitHub or GitLab that have the **`hacktoberfest`** topic.  
+3. 💪 **Submit 6 high-quality Pull Requests (PRs)** between October 1 and October 31.  
+   - Make sure maintainers accept your PRs for them to count.  
+4. 🏅 **Unlock badges** as you contribute and level up with each accepted PR/MR.  
+5. 👕 **Swag:** Earn an exclusive **Hacktoberfest 2025 T-Shirt** if you’re among the first **10,000 Super Contributors** with 6 accepted PRs! *(T&Cs apply)*  
+
+For more details, visit 👉 [https://hacktoberfest.com/participation/](https://hacktoberfest.com/participation/)
+
+---
+
+## 🧭 Rules  
+
+### 1️⃣ No DSA Codes ❌  
+Do **not** submit DSA (Data Structures & Algorithms) codes or basic coding problem solutions.  
+Such submissions will be marked as **spam** and may **disqualify you from Hacktoberfest** participation.
+
+---
+
+### 2️⃣ What You Can Contribute ✅  
+You can contribute in one of the following ways:
+
+- 🧩 **Create a webpage** using **HTML, CSS, and JavaScript** (perfect for beginners).  
+- ⚙️ **Contribute to the current project** — improve the **PowerShell Showcase** (UI, responsiveness, scripts, or new features).  
+- 💻 **Work on your own project** — it can be based on:
+  - 📱 Android  
+  - 🌐 Web Development  
+  - 🤖 Machine Learning  
+  - ⚙️ Robotics  
+  - 🐍 Python  
+  - 🧠 Any other tech stack (as long as it’s functional and adds value)
+
+💡 Make sure your contribution is **meaningful**, **functional**, and **worthy enough** to be merged.
+
+---
+
+### 3️⃣ Add Snapshots or Deployment Link 🖼️  
+Every project submission must include **one** of the following:
+- 📸 Screenshots of your working project, **or**
+- 🔗 A deployed/live link (GitHub Pages, Netlify, etc.)
+
+This helps reviewers verify your work quickly and fairly.
+
+---
+
+### 4️⃣ Follow & Support 🌟  
+- Make sure to **follow [Shubham](https://github.com/shubham7668)** on GitHub.  
+- Don’t forget to **star ⭐ the repository** to show your support and help it grow.
+
+---
+
+### ⚠️ Note  
+- 🚫 Do **not** push incomplete or non-working projects.  
+- 🕵️ All submissions will be **reviewed thoroughly** before approval.  
+- 🧨 Pull requests violating these rules will be marked as **invalid/spam**.
+
+---
+
+> 🧠 **Tip:** Read the [CONTRIBUTING.md](./CONTRIBUTING.md) file carefully before opening a Pull Request to ensure fast approval!
+
+---
+
+## 📜 LICENSE
   
-NOTE ⚠ : Dont push non working projects we will thoroughly check.
+This project is licensed under the [MIT License](https://github.com/shubham7668/potfolio/blob/main/LICENSE).  
 
-## Welcome to Hacktober Fest 
+---
 
-• EVERYONE IS WELCOME    
-• QUANTITY IS FUN, QUALITY IS KEY    
-• SHORT-TERM ACTION, LONG-TERM IMPACT    
+### ❤️ Support the Community
+If you like this initiative:
+- ⭐ **Star this repository**
+- 🧑‍💻 **Contribute**
+- 🔁 **Share** with friends and colleagues
 
-• Contribute anything to start with 🙌
-
-## How to participate :  
-
-• Register anytime between September 15 and October 31.
-
-• Pull requests can be made in any GITHUB or GITLAB hosted project that’s participating in Hacktoberfest (look for the “hacktoberfest” topic).
-
-• Aim to submit 6 high-quality pull/merge requests between October 1 and October 31, with project maintainers accepting your pull/merge requests for them to count toward your total.
-
-• You’ll unlock a digital badge when you register for Hacktoberfest, and level it up with each of your 6 pull/merge requests accepted during Hacktoberfest.
-
-• Swag - Get an exclusive Hacktoberfest T-Shirt, but its only for ‘Super Contributors’ who contribute 6 accepted PR/MRs to a worthy repository. (T&Cs Apply | Valid only for the first 10,000 contributors completing 6 PR/MR)
-
-• For more info headover to https://hacktoberfest.com/participation/
-
-
-## LICENSE
-  
-[MIT](https://github.com/shubham7668/potfolio/blob/main/LICENSE)
-  
+Let’s make open source even more awesome together! 💪✨
