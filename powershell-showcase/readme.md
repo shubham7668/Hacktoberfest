@@ -32,5 +32,5 @@ This project was built to **help others discover and share small, practical Powe
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/powershell-showcase.git
+git clone https://github.com/shubham7668/powershell-showcase.git
 cd powershell-showcase
