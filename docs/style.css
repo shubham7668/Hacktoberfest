@@ -55,3 +55,15 @@ footer {
   background-color: #161b22;
   border-top: 1px solid #30363d;
 }
+.social-icons {
+  margin-top: 10px;
+}
+.social-icons a{
+  color: #c9d1d9;
+  margin: 0 10px;
+  font-size: 1.5rem;
+  transition: color 0.3s;
+}
+.social-icons a:hover{
+  color: #58a6ff;
+}
