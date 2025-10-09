@@ -24,7 +24,7 @@ a:hover {
 
 main {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(2, minmax(300px, 1fr));
   gap: 1rem;
   padding: 2rem;
 }
@@ -34,6 +34,9 @@ main {
   padding: 1rem;
   border-radius: 8px;
   border: 1px solid #30363d;
+}
+.card pre, .card code{
+  text-wrap: wrap;
 }
 
 button {
@@ -54,4 +57,11 @@ footer {
   padding: 1rem;
   background-color: #161b22;
   border-top: 1px solid #30363d;
+}
+
+@media screen and (max-width:825px) {
+  main{
+    display: flex;
+    flex-direction: column;
+  }
 }
