@@ -14,7 +14,8 @@ header {
   border-bottom: 1px solid #30363d;
 }
 
-h1, h3 {
+h1,
+h3 {
   margin-top: 0;
 }
 
@@ -44,7 +45,7 @@ main {
 }
 
 .card p {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 pre {
@@ -85,7 +86,6 @@ footer {
   border-top: 1px solid #30363d;
 }
 
-
 @media (max-width: 768px) {
   main {
     padding: 1rem;
@@ -101,8 +101,9 @@ footer {
     text-align: center;
   }
 
-  button, .card-actions a {
-    width: 100%; 
+  button,
+  .card-actions a {
+    width: 100%;
   }
 }
 
@@ -116,13 +117,13 @@ footer {
 }
 
 .console-output {
-  display: none;
   background-color: #010409;
   border: 1px solid #30363d;
   border-radius: 5px;
   margin-top: 1rem;
   padding: 1rem;
   font-family: 'Courier New', Courier, monospace;
+  min-height: 70px;
 }
 
 .console-output .output-text {
@@ -136,6 +137,13 @@ footer {
   font-size: 0.9rem;
 }
 
+.output-text:empty::before {
+  content: "Click '▶️ Run Demo' to see the output here...";
+  color: #6e7681;
+  font-style: italic;
+  font-family: Arial, sans-serif;
+}
+
 .cursor {
   display: inline-block;
   background-color: #c9d1d9;
@@ -146,6 +154,11 @@ footer {
 }
 
 @keyframes blink {
-  from, to { background-color: transparent; }
-  50% { background-color: #c9d1d9; }
+  from,
+  to {
+    background-color: transparent;
+  }
+  50% {
+    background-color: #c9d1d9;
+  }
 }
