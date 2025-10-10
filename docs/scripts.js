@@ -1,4 +1,5 @@
 const showcase = document.getElementById("showcase");
+const searchInput = document.getElementById("searchInput");
 
 const scripts = [
   {
@@ -126,3 +127,37 @@ function runDemo(button) {
   }
   typeWriter();
 }
+
+
+function displayFilteredScripts(filtered) {
+  showcase.innerHTML = "";
+  filtered.forEach((script, index) => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <h3>${script.name}</h3>
+      <p>${script.description}</p>
+      <pre><code>${script.code.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>
+      
+      <div class="console-output" data-index="${index}">
+        <pre class="output-text"></pre>
+      </div>
+
+      <div class="card-actions">
+          <button class="btn-demo" data-index="${index}">▶️ Run Demo</button>
+          <button class="btn-copy" data-index="${index}">📋 Copy</button>
+          <button onclick="window.open('https://github.com/shubham7668/Hacktoberfest/issues/new?title=Improve%20${encodeURIComponent(script.name)}%20Script', '_blank')">💬 Suggest Improvement</button>
+      </div>
+    `;
+    showcase.appendChild(card);
+  });
+}
+
+searchInput.addEventListener("input", e => {
+  const term = e.target.value.toLowerCase();
+  const filtered = scripts.filter(script =>
+    script.name.toLowerCase().includes(term) ||
+    script.description.toLowerCase().includes(term)
+  );
+  displayFilteredScripts(filtered);
+});
