@@ -1,6 +1,29 @@
+// ------------------------------
+// Dark/Light Mode Toggle
+// ------------------------------
+const toggleBtn = document.createElement('button');
+toggleBtn.id = 'darkToggle';
+toggleBtn.className = 'dark-toggle';
+toggleBtn.textContent = '☀️'; // Sun icon initially (dark mode default)
+document.body.appendChild(toggleBtn);
+
+document.body.classList.add('dark-mode');
+let isDark = true;
+
+toggleBtn.addEventListener('click', () => {
+  document.body.classList.toggle('light-mode');
+  document.body.classList.toggle('dark-mode');
+  isDark = !isDark;
+  toggleBtn.textContent = isDark ? '☀️' : '🌙';
+});
+
+// ------------------------------
+// PowerShell Scripts Showcase
+// ------------------------------
 const showcase = document.getElementById("showcase");
 
 const scripts = [
+  /* Your existing scripts array (unchanged) */
   {
     name: "Disk Space Alert",
     description: "Alert when a drive’s free space is below a threshold.",
@@ -82,7 +105,9 @@ scripts.forEach((script, index) => {
   showcase.appendChild(card);
 });
 
-
+// ------------------------------
+// Copy & Demo Button Handlers
+// ------------------------------
 document.addEventListener('click', function(e) {
   const target = e.target;
 
