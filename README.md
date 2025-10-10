@@ -1,5 +1,23 @@
 # 🎉 Welcome to Hacktoberfest 2025  
 
+<p align="center">
+  <a href="https://hacktoberfest.com/">
+    <img src="https://img.shields.io/badge/Hacktoberfest-2025-blueviolet?style=for-the-badge&logo=hackster&logoColor=white" alt="Hacktoberfest 2025 Badge"/>
+  </a>
+  <a href="https://github.com/shubham7668/Hacktoberfest/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/shubham7668/Hacktoberfest?style=for-the-badge" alt="License Badge"/>
+  </a>
+  <a href="https://github.com/shubham7668/Hacktoberfest/stargazers">
+    <img src="https://img.shields.io/github/stars/shubham7668/Hacktoberfest?style=for-the-badge&color=yellow" alt="Stars Badge"/>
+  </a>
+  <a href="https://github.com/shubham7668/Hacktoberfest/network/members">
+    <img src="https://img.shields.io/github/forks/shubham7668/Hacktoberfest?style=for-the-badge&color=brightgreen" alt="Forks Badge"/>
+  </a>
+  <a href="https://github.com/shubham7668/Hacktoberfest/pulls">
+    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=for-the-badge" alt="PRs Welcome Badge"/>
+  </a>
+</p>
+
 ## 🌟 Everyone is Welcome!  
 Hacktoberfest is all about celebrating open source, collaboration, and learning by contributing to real-world projects.
 
@@ -76,7 +94,7 @@ This helps reviewers verify your work quickly and fairly.
 
 ## 📜 LICENSE
   
-This project is licensed under the [MIT License](https://github.com/shubham7668/potfolio/blob/main/LICENSE).  
+This project is licensed under the [MIT License](https://github.com/shubham7668/Hacktoberfest/blob/main/LICENSE).  
 
 ---
 
