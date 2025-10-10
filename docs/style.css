@@ -14,7 +14,8 @@ header {
   border-bottom: 1px solid #30363d;
 }
 
-h1, h3 {
+h1,
+h3 {
   margin-top: 0;
 }
 
@@ -44,7 +45,7 @@ main {
 }
 
 .card p {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 pre {
@@ -85,7 +86,6 @@ footer {
   border-top: 1px solid #30363d;
 }
 
-
 @media (max-width: 768px) {
   main {
     padding: 1rem;
@@ -101,7 +101,64 @@ footer {
     text-align: center;
   }
 
-  button, .card-actions a {
-    width: 100%; 
+  button,
+  .card-actions a {
+    width: 100%;
+  }
+}
+
+.btn-demo {
+  background-color: #30363d;
+  color: #c9d1d9;
+}
+
+.btn-demo:hover {
+  background-color: #484f58;
+}
+
+.console-output {
+  background-color: #010409;
+  border: 1px solid #30363d;
+  border-radius: 5px;
+  margin-top: 1rem;
+  padding: 1rem;
+  font-family: 'Courier New', Courier, monospace;
+  min-height: 70px;
+}
+
+.console-output .output-text {
+  white-space: pre-wrap;
+  word-break: break-all;
+  color: #8b949e;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+}
+
+.output-text:empty::before {
+  content: "Click '▶️ Run Demo' to see the output here...";
+  color: #6e7681;
+  font-style: italic;
+  font-family: Arial, sans-serif;
+}
+
+.cursor {
+  display: inline-block;
+  background-color: #c9d1d9;
+  width: 8px;
+  height: 1.2em;
+  animation: blink 1s step-end infinite;
+  vertical-align: bottom;
+}
+
+@keyframes blink {
+  from,
+  to {
+    background-color: transparent;
+  }
+  50% {
+    background-color: #c9d1d9;
   }
 }
