@@ -31,13 +31,13 @@ scripts.forEach(script => {
   const card = document.createElement("div");
   card.className = "card";
 
-  card.innerHTML = `
-    <h3>${script.name}</h3>
-    <p>${script.description}</p>
-    <pre><code>${script.code}</code></pre>
-    <button onclick="copyCode(\`${script.code}\`)">📋 Copy</button>
-    <a href="${script.github}" target="_blank">🔗 View on GitHub</a>
-  `;
+card.innerHTML = `
+  <h3>${script.name}</h3>
+  <p>${script.description}</p>
+  <pre><code>${script.code}</code></pre>
+  <button onclick="copyCode(\`${script.code}\`)">📋 Copy</button>
+  <a href="https://github.com/shubham7668/Hacktoberfest/issues/new?title=Improve%20${encodeURIComponent(script.name)}%20Script" target="_blank">💬 Suggest Improvement</a>
+`;
 
   showcase.appendChild(card);
 });
