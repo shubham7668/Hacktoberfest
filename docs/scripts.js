@@ -1,4 +1,5 @@
 const showcase = document.getElementById("showcase");
+const searchInput = document.getElementById("searchInput");
 
 const scripts = [
   {
@@ -27,35 +28,37 @@ const scripts = [
   }
 ];
 
-scripts.forEach((script, index) => {
-  const card = document.createElement("div");
-  card.className = "card";
+function displayScripts(filteredScripts) {
+  showcase.innerHTML = ""; 
 
-  card.innerHTML = `
-    <h3>${script.name}</h3>
-    <p>${script.description}</p>
-    <pre><code>${script.code}</code></pre>
-    <button data-index="${index}">📋 Copy</button>
-    <a href="https://github.com/shubham7668/Hacktoberfest/issues/new?title=Improve%20${encodeURIComponent(script.name)}%20Script" target="_blank">💬 Suggest Improvement</a>
-  `;
+  filteredScripts.forEach(script => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <h3>${script.name}</h3>
+      <p>${script.description}</p>
+      <pre><code>${script.code}</code></pre>
+      <button onclick="copyCode(\`${script.code}\`)">📋 Copy</button>
+      <a href="${script.github}" target="_blank">🔗 View on GitHub</a>
+    `;
+    showcase.appendChild(card);
+  });
+}
 
-  showcase.appendChild(card);
+
+displayScripts(scripts);
+
+
+searchInput.addEventListener("input", e => {
+  const searchTerm = e.target.value.toLowerCase();
+  const filtered = scripts.filter(script =>
+    script.name.toLowerCase().includes(searchTerm) ||
+    script.description.toLowerCase().includes(searchTerm)
+  );
+  displayScripts(filtered);
 });
 
-// Add event listeners to all copy buttons
-document.addEventListener('click', function(e) {
-  if (e.target.tagName === 'BUTTON' && e.target.hasAttribute('data-index')) {
-    const index = e.target.getAttribute('data-index');
-    const code = scripts[index].code;
-    navigator.clipboard.writeText(code);
-  }
-});
-
-// Add event listeners to all copy buttons
-document.addEventListener('click', function(e) {
-  if (e.target.tagName === 'BUTTON' && e.target.hasAttribute('data-index')) {
-    const index = e.target.getAttribute('data-index');
-    const code = scripts[index].code;
-    navigator.clipboard.writeText(code);
-  }
-});
+function copyCode(code) {
+  navigator.clipboard.writeText(code);
+  alert("Copied to clipboard!");
+}
