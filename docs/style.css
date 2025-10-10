@@ -105,3 +105,47 @@ footer {
     width: 100%; 
   }
 }
+
+.btn-demo {
+  background-color: #30363d;
+  color: #c9d1d9;
+}
+
+.btn-demo:hover {
+  background-color: #484f58;
+}
+
+.console-output {
+  display: none;
+  background-color: #010409;
+  border: 1px solid #30363d;
+  border-radius: 5px;
+  margin-top: 1rem;
+  padding: 1rem;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.console-output .output-text {
+  white-space: pre-wrap;
+  word-break: break-all;
+  color: #8b949e;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+}
+
+.cursor {
+  display: inline-block;
+  background-color: #c9d1d9;
+  width: 8px;
+  height: 1.2em;
+  animation: blink 1s step-end infinite;
+  vertical-align: bottom;
+}
+
+@keyframes blink {
+  from, to { background-color: transparent; }
+  50% { background-color: #c9d1d9; }
+}
