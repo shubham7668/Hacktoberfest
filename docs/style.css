@@ -186,3 +186,49 @@ body.dark-mode .dark-toggle {
   background: #0d1117;
   color: #c9d1d9;
 }
+  from,
+  to {
+    background-color: transparent;
+  }
+  50% {
+    background-color: #c9d1d9;
+  }
+}
+
+
+#search-section {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+#searchInput {
+  width: 60%;
+  max-width: 500px;
+  padding: 12px 18px;
+  font-size: 16px;
+  color: #c9d1d9;
+  background-color: #0d1117;
+  border: 2px solid #58a6ff;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(88, 166, 255, 0.15);
+}
+
+#searchInput::placeholder {
+  color: #8b949e;
+  font-style: italic;
+}
+
+#searchInput:focus {
+  border-color: #79c0ff;
+  box-shadow: 0 0 12px rgba(121, 192, 255, 0.4);
+  background-color: #161b22;
+}
+
+@media (max-width: 600px) {
+  #searchInput {
+    width: 80%;
+    font-size: 15px;
+  }
+}
