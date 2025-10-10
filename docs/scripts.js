@@ -1,4 +1,5 @@
 const showcase = document.getElementById("showcase");
+const searchInput = document.getElementById("searchInput");
 
 const scripts = [
   {
