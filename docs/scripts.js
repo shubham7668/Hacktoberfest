@@ -28,6 +28,34 @@ const scripts = [
     code: `$PSVersionTable.PSVersion`,
     github: "https://github.com/shubham7668/powershell-showcase",
     demoOutput: "Major  Minor  Build  Revision\n-----  -----  -----  --------\n7      2      5      -1"
+  },
+  {
+    name: "Find Large Files",
+    description: "List files larger than 100MB in a folder and its subfolders.",
+    code: `Get-ChildItem -Path "C:\\Users\\Folder" -Recurse | Where-Object { !$_.PSIsContainer -and $_.Length -gt 100MB } | Select-Object FullName, Length`,
+    github: "https://github.com/shubham7668/powershell-showcase",
+    demoOutput: "PS C:\\> C:\\Users\\Shubham\\Videos\\movie.mp4  120000000\nPS C:\\> C:\\Users\\Shubham\\Downloads\\bigfile.zip  150000000"
+  },
+  {
+    name: "Export Installed Programs",
+    description: "Export a list of installed programs to a CSV file.",
+    code: `Get-ItemProperty HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\* | Select-Object DisplayName, DisplayVersion | Export-Csv C:\\installed_programs.csv -NoTypeInformation`,
+    github: "https://github.com/shubham7668/powershell-showcase",
+    demoOutput: "PS C:\\> # installed_programs.csv created with program names and versions."
+  },
+  {
+    name: "Kill a Process by Name",
+    description: "Forcefully stop all processes with a given name.",
+    code: `Get-Process notepad | Stop-Process -Force`,
+    github: "https://github.com/shubham7668/powershell-showcase",
+    demoOutput: "PS C:\\> # All Notepad processes terminated."
+  },
+  {
+    name: "Show Network Adapters",
+    description: "Display all network adapters and their IP addresses.",
+    code: `Get-NetIPAddress | Select-Object InterfaceAlias, IPAddress`,
+    github: "https://github.com/shubham7668/powershell-showcase",
+    demoOutput: "PS C:\\> Ethernet : 192.168.1.10\nPS C:\\> Wi-Fi : 192.168.1.15"
   }
 ];
 
