@@ -50,3 +50,12 @@ document.addEventListener('click', function(e) {
     navigator.clipboard.writeText(code);
   }
 });
+
+// Add event listeners to all copy buttons
+document.addEventListener('click', function(e) {
+  if (e.target.tagName === 'BUTTON' && e.target.hasAttribute('data-index')) {
+    const index = e.target.getAttribute('data-index');
+    const code = scripts[index].code;
+    navigator.clipboard.writeText(code);
+  }
+});
