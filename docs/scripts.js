@@ -47,7 +47,7 @@ scripts.forEach((script, index) => {
     <div class="card-actions">
         <button class="btn-demo" data-index="${index}">▶️ Run Demo</button>
         <button class="btn-copy" data-index="${index}">📋 Copy</button>
-        <a href="https://github.com/shubham7668/Hacktoberfest/issues/new?title=Improve%20${encodeURIComponent(script.name)}%20Script" target="_blank">💬 Suggest Improvement</a>
+        <button onclick="window.open('https://github.com/shubham7668/Hacktoberfest/issues/new?title=Improve%20${encodeURIComponent(script.name)}%20Script', '_blank')">💬 Suggest Improvement</button>
     </div>
   `;
 
