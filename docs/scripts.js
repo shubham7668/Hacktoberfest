@@ -1,5 +1,5 @@
 const showcase = document.getElementById("showcase");
-const searchInput = document.getElementById("searchInput");
+
 
 const scripts = [
   {
@@ -60,9 +60,8 @@ const scripts = [
   }
 ];
 
-scripts.forEach((script, index) => {
-  const card = document.createElement("div");
-  card.className = "card";
+function displayScripts(filteredScripts) {
+  showcase.innerHTML = ""; 
 
   card.innerHTML = `
     <h3>${script.name}</h3>
@@ -80,7 +79,17 @@ scripts.forEach((script, index) => {
     </div>
   `;
 
-  showcase.appendChild(card);
+
+displayScripts(scripts);
+
+
+searchInput.addEventListener("input", e => {
+  const searchTerm = e.target.value.toLowerCase();
+  const filtered = scripts.filter(script =>
+    script.name.toLowerCase().includes(searchTerm) ||
+    script.description.toLowerCase().includes(searchTerm)
+  );
+  displayScripts(filtered);
 });
 
 
@@ -126,4 +135,6 @@ function runDemo(button) {
     }
   }
   typeWriter();
+
+}
 }
