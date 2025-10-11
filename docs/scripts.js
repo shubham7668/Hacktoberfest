@@ -156,7 +156,6 @@ function runDemo(button) {
   typeWriter();
 }
 
-
 function displayFilteredScripts(filtered) {
   showcase.innerHTML = "";
   filtered.forEach((script, index) => {
