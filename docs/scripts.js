@@ -3,6 +3,44 @@ const searchInput = document.getElementById("searchInput");
 
 let scripts = [];
 
+// Cookie utility functions
+function setCookie(name, value, days = 365) {
+  const expires = new Date();
+  expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+  document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+}
+
+function getCookie(name) {
+  const nameEQ = name + "=";
+  const ca = document.cookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}
+
+// Initialize theme from cookie on page load
+function initTheme() {
+  const savedTheme = getCookie('theme');
+  const themeToggle = document.getElementById("theme-toggle");
+  
+  if (savedTheme === 'light') {
+    document.body.classList.add('light-mode');
+    if (themeToggle) {
+      themeToggle.textContent = "☀️";
+    }
+  } else {
+    if (themeToggle) {
+      themeToggle.textContent = "🌙";
+    }
+  }
+}
+
+// Initialize theme immediately
+initTheme();
+
 // Load scripts from JSON file
 fetch('scripts.json')
   .then(response => response.json())
@@ -93,7 +131,17 @@ searchInput.addEventListener("input", e => {
 });
 
 const themeToggle = document.getElementById("theme-toggle");
-themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("light-mode");
-  themeToggle.textContent = document.body.classList.contains("light-mode") ? "☀️" : "🌙";
-});
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("light-mode");
+    
+    // Save preference in cookie
+    if (document.body.classList.contains("light-mode")) {
+      setCookie('theme', 'light', 365);
+      themeToggle.textContent = "☀️";
+    } else {
+      setCookie('theme', 'dark', 365);
+      themeToggle.textContent = "🌙";
+    }
+  });
+}
