@@ -200,3 +200,49 @@ footer {
     font-size: 15px;
   }
 }
+
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #c9d1d9;
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: rotate(20deg);
+}
+
+/* Light Mode Styles */
+.light-mode {
+  background-color: #ffffff;
+  color: #0d1117;
+}
+
+.light-mode header,
+.light-mode footer,
+.light-mode .card,
+.light-mode pre,
+.light-mode .console-output {
+  background-color: #f2f2f2;
+  border-color: #d0d7de;
+}
+
+.light-mode #searchInput {
+  background-color: #ffffff;
+  color: #0d1117;
+  border-color: #58a6ff;
+}
+
+.light-mode button {
+  background-color: #238636;
+  color: white;
+}
+
+.light-mode a {
+  color: #0969da;
+}
