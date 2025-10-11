@@ -162,3 +162,87 @@ footer {
     background-color: #c9d1d9;
   }
 }
+
+
+#search-section {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+#searchInput {
+  width: 60%;
+  max-width: 500px;
+  padding: 12px 18px;
+  font-size: 16px;
+  color: #c9d1d9;
+  background-color: #0d1117;
+  border: 2px solid #58a6ff;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(88, 166, 255, 0.15);
+}
+
+#searchInput::placeholder {
+  color: #8b949e;
+  font-style: italic;
+}
+
+#searchInput:focus {
+  border-color: #79c0ff;
+  box-shadow: 0 0 12px rgba(121, 192, 255, 0.4);
+  background-color: #161b22;
+}
+
+@media (max-width: 600px) {
+  #searchInput {
+    width: 80%;
+    font-size: 15px;
+  }
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #c9d1d9;
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: rotate(20deg);
+}
+
+/* Light Mode Styles */
+.light-mode {
+  background-color: #ffffff;
+  color: #0d1117;
+}
+
+.light-mode header,
+.light-mode footer,
+.light-mode .card,
+.light-mode pre,
+.light-mode .console-output {
+  background-color: #f2f2f2;
+  border-color: #d0d7de;
+}
+
+.light-mode #searchInput {
+  background-color: #ffffff;
+  color: #0d1117;
+  border-color: #58a6ff;
+}
+
+.light-mode button {
+  background-color: #238636;
+  color: white;
+}
+
+.light-mode a {
+  color: #0969da;
+}
