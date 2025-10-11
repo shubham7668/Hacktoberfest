@@ -57,6 +57,34 @@ const scripts = [
     code: `Get-NetIPAddress | Select-Object InterfaceAlias, IPAddress`,
     github: "https://github.com/shubham7668/powershell-showcase",
     demoOutput: "PS C:\\> Ethernet : 192.168.1.10\nPS C:\\> Wi-Fi : 192.168.1.15"
+  },
+  {
+    name: "Restart Windows Explorer",
+    description: "Quickly restart Windows Explorer to fix UI glitches or refresh the desktop.",
+    code: `Stop-Process -Name explorer -Force\nStart-Process explorer.exe`,
+    github: "https://github.com/shubham7668/powershell-showcase",
+    demoOutput: "PS C:\\> # Windows Explorer restarted."
+  },
+  {
+    name: "Clear Temp Files",
+    description: "Delete all files in the user's Temp folder to free up space.",
+    code: `Remove-Item -Path $env:TEMP\\* -Recurse -Force`,
+    github: "https://github.com/shubham7668/powershell-showcase",
+    demoOutput: "PS C:\\> # All temp files deleted."
+  },
+  {
+    name: "Enable Remote Desktop",
+    description: "Enable Remote Desktop and allow connections through Windows Firewall.",
+    code: `Set-ItemProperty -Path 'HKLM:\\System\\CurrentControlSet\\Control\\Terminal Server' -Name 'fDenyTSConnections' -Value 0\nEnable-NetFirewallRule -DisplayGroup 'Remote Desktop'`,
+    github: "https://github.com/shubham7668/powershell-showcase",
+    demoOutput: "PS C:\\> # Remote Desktop enabled and firewall rule added."
+  },
+  {
+    name: "Show Last Boot Time",
+    description: "Display the last time the system was booted.",
+    code: `Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object LastBootUpTime`,
+    github: "https://github.com/shubham7668/powershell-showcase",
+    demoOutput: "PS C:\\> LastBootUpTime : 10/11/2025 08:23:45"
   }
 ];
 
