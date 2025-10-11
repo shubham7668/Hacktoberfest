@@ -12,6 +12,7 @@ header {
   padding: 2rem 1rem;
   background-color: #161b22;
   border-bottom: 1px solid #30363d;
+  position: relative;
 }
 
 h1,
@@ -86,27 +87,6 @@ footer {
   border-top: 1px solid #30363d;
 }
 
-@media (max-width: 768px) {
-  main {
-    padding: 1rem;
-    grid-template-columns: 1fr;
-  }
-
-  .card-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .card-actions a {
-    text-align: center;
-  }
-
-  button,
-  .card-actions a {
-    width: 100%;
-  }
-}
-
 .btn-demo {
   background-color: #30363d;
   color: #c9d1d9;
@@ -163,7 +143,6 @@ footer {
   }
 }
 
-
 #search-section {
   text-align: center;
   margin: 1.5rem 0;
@@ -194,9 +173,108 @@ footer {
   background-color: #161b22;
 }
 
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: 2px solid #30363d;
+  padding: 0.5rem;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #c9d1d9;
+  transition: all 0.3s ease;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.theme-toggle:hover {
+  transform: rotate(20deg);
+  background-color: #30363d;
+}
+
+.theme-toggle:active {
+  transform: scale(0.95); 
+}
+
+.light-mode {
+  background-color: #ffffff;
+  color: #0d1117;
+}
+
+.light-mode header,
+.light-mode footer,
+.light-mode .card,
+.light-mode pre,
+.light-mode .console-output {
+  background-color: #f2f2f2;
+  border-color: #d0d7de;
+}
+
+.light-mode #searchInput {
+  background-color: #ffffff;
+  color: #0d1117;
+  border-color: #58a6ff;
+}
+
+.light-mode button {
+  background-color: #238636;
+  color: white;
+}
+
+.light-mode a {
+  color: #0969da;
+}
+
+@media (max-width: 768px) {
+  main {
+    padding: 1rem;
+    grid-template-columns: 1fr;
+  }
+
+  .card-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .card-actions a {
+    text-align: center;
+  }
+
+  button,
+  .card-actions a {
+    width: 100%;
+  }
+
+  theme-toggle {
+    width: 42px;
+    height: 42px;
+    top: 15px;
+    right: 15px;
+  }
+  
+  h1 {
+    padding-right: 50px;
+  }
+}
+
 @media (max-width: 600px) {
   #searchInput {
     width: 80%;
     font-size: 15px;
   }
+
+  .theme-toggle {
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+  }
 }
+
