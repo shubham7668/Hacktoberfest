@@ -16,6 +16,44 @@ header {
   overflow: visible;
 }
 
+.site-header {
+  display: block;
+}
+
+.site-header-top,
+.site-header-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.site-logo {
+  font-size: 1.25rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.site-logo .site-logo-short {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* show short logo on mobile, hide longer text */
+  .site-logo .site-logo-full {
+    display: none;
+  }
+
+  .site-logo .site-logo-short {
+    display: inline-block;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-size: 1rem;
+  }
+}
+
 h1,
 h3 {
   margin-top: 0;
@@ -182,6 +220,70 @@ html.light footer {
   main {
     padding: 1rem;
     grid-template-columns: 1fr;
+  }
+
+  /* Mobile header layout: stack and make controls compact */
+  .site-header-top,
+  .site-header-bottom {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+  }
+
+  .site-header-top {
+    gap: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .site-logo {
+    font-size: 1rem;
+    word-break: break-word;
+  }
+
+  .hero-button-wrap {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .hero-star-btn {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+    align-self: flex-end;
+  }
+
+  .site-header-bottom {
+    gap: 0.5rem;
+  }
+
+  .theme-switch {
+    order: 2;
+    align-self: flex-end;
+  }
+
+  /* Make search occupy full width on mobile */
+  .header-search {
+    order: 1;
+    width: 100%;
+    display: block;
+  }
+
+  .mainbox {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .search_input {
+    flex: 1 1 auto;
+    width: 100%;
+    padding: 0.55rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+  }
+
+  .iconContainer {
+    padding: 0.45rem;
   }
 
   .card-actions {
@@ -578,6 +680,71 @@ html.light .button-run {
   }
 }
 
+/* Mobile: make the search pill static and centered to avoid overlap */
+@media (max-width: 768px) {
+  .header-search {
+    position: static !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin: 0.5rem auto;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index: 30;
+  }
+
+  .header-search .mainbox {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 8px 10px;
+  }
+
+  /* left-align input text and placeholder on mobile for better readability */
+  .header-search .search_input,
+  .header-search .search_input::placeholder {
+    text-align: left;
+    padding-left: 8px;
+  }
+
+  /* slightly reduce icon size for compactness */
+  .header-search .iconContainer {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+/* Tighter terminal header and copy button on small screens */
+@media (max-width: 520px) {
+  /* reduce the head horizontal padding so controls sit closer */
+  .uiverse-terminal .head {
+    padding-inline: 8px;
+    min-height: 36px;
+  }
+
+  /* make the copy button more compact by reducing horizontal padding and svg size */
+  .uiverse-terminal .copy_toggle {
+    padding: 0.12rem 0.28rem;
+    border-radius: 5px;
+    border-width: 0.6px;
+    margin-left: auto; /* keep it aligned to the right */
+    min-width: unset;
+    width: auto;
+  }
+
+  .uiverse-terminal .copy_toggle>svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* ensure the pre / code area has small horizontal padding to avoid overflow */
+  .uiverse-terminal .pre {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+}
+
 /* theme adjustments */
 html.light .header-search .mainbox {
   background: linear-gradient(180deg, #ffffff, #fcfcfc);
@@ -911,6 +1078,24 @@ html.light .button svg path {
 .site-header-bottom {
   margin-top: 0.5rem;
   text-align: center;
+}
+
+/* Ensure the header subtitle is centered in desktop layouts */
+@media (min-width: 721px) {
+  .site-header-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .site-header-bottom p {
+    margin: 0;
+    max-width: 900px;
+    width: 100%;
+    padding: 0 1rem;
+    text-align: center;
+  }
 }
 
 @media (max-width: 720px) {

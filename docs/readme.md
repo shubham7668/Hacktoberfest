@@ -34,3 +34,15 @@ This project was built to **help others discover and share small, practical Powe
 ```bash
 git clone https://github.com/shubham7668/powershell-showcase.git
 cd powershell-showcase
+
+
+```### 2️⃣ Open `index.html` in Your Browser
+You can simply double-click the `index.html` file or serve it using a local server.
+For example, using Python's built-in server:
+```bash
+python -m http.server
+```
+Then navigate to `http://localhost:8000` in your browser.
+
+### 3️⃣ Explore and Use the Scripts
+Browse through the showcased PowerShell scripts, and click the "Copy" button to copy any script to your clipboard.
