@@ -12,6 +12,8 @@ header {
   padding: 2rem 1rem;
   background-color: #161b22;
   border-bottom: 1px solid #30363d;
+  position: relative;
+  overflow: visible;
 }
 
 h1,
@@ -30,18 +32,63 @@ a:hover {
 
 main {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  /* default: single column for narrow screens */
+  grid-template-columns: 1fr;
   gap: 1.5rem;
   padding: 2rem;
 }
 
+/* medium screens: two columns */
+@media (min-width: 720px) {
+  main {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 2rem 2.5rem;
+  }
+}
+
+/* desktop: exactly three columns to improve spacing */
+@media (min-width: 1100px) {
+  main {
+    /* allow columns to shrink when content is long */
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    /* keep layout centered but allow smaller viewports to fit */
+    max-width: calc(100% - 40px);
+    margin: 0 auto;
+    padding: 2.5rem 1rem;
+  }
+}
+
+.cards,
+.cards-grid,
+.cards-container,
+.cards-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  align-items: start;
+  /* top-align cards for even rows */
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .card {
   background-color: #161b22;
-  padding: 1.5rem;
   border-radius: 8px;
-  border: 1px solid #30363d;
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  min-height: 320px;
+  /* evens out visual heights */
+  box-sizing: border-box;
+  border: 1px solid #30363d;
+}
+
+/* allow grid items to shrink below their content width when needed */
+.card,
+.uiverse-card {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .card p {
@@ -58,11 +105,35 @@ pre {
   font-size: 0.9rem;
 }
 
+.card pre,
+.card code,
+.console-output,
+.console-output .output-text,
+.code-block {
+  font-family: Consolas, "Courier New", Menlo, Monaco, monospace;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  white-space: pre;
+  /* preserve whitespace, prevent soft-wrap */
+  overflow-x: auto;
+  /* horizontal scroll for long lines */
+  word-break: normal;
+  hyphens: none;
+  tab-size: 4;
+  -moz-tab-size: 4;
+  padding: 0.65rem;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.55);
+  color: #e6edf3;
+  display: block;
+  min-height: 3.6rem;
+}
+
 .card-actions {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: 0.75rem;
 }
 
 button {
@@ -82,8 +153,29 @@ button:hover {
 footer {
   text-align: center;
   padding: 1rem;
-  background-color: #161b22;
-  border-top: 1px solid #30363d;
+  /* Use the same patterned grid background as the header */
+  padding: 1rem;
+  --gap: 5em;
+  --line: 1px;
+  --color: rgba(255, 255, 255, 0.246);
+  background-image: linear-gradient(-90deg,
+      transparent calc(var(--gap) - var(--line)),
+      var(--color) calc(var(--gap) - var(--line) + 1px),
+      var(--color) var(--gap)),
+    linear-gradient(0deg,
+      transparent calc(var(--gap) - var(--line)),
+      var(--color) calc(var(--gap) - var(--line) + 1px),
+      var(--color) var(--gap));
+  background-size: var(--gap) var(--gap);
+  background-color: #000000df; /* dark base */
+  border-top: 1px solid rgba(255, 255, 255, 0.184);
+}
+
+/* Keep the footer pattern subtle in light theme */
+html.light footer {
+  --color: rgba(0, 0, 0, 0.06);
+  background-color: #ffffff;
+  border-top: 1px solid rgba(2, 4, 15, 0.224);
 }
 
 @media (max-width: 768px) {
@@ -116,14 +208,78 @@ footer {
   background-color: #484f58;
 }
 
+/* Run Demo button style (keeps dark appearance even in light theme) */
+.button-run {
+  font-size: 17px;
+  border-radius: 9px;
+  background: linear-gradient(180deg, rgb(56, 56, 56) 0%, rgb(36, 36, 36) 66%, rgb(41, 41, 41) 100%);
+  color: rgb(241, 241, 241);
+  border: 1px solid whitesmoke;
+  padding: 1px;
+  font-weight: 700;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  transition: 400ms;
+}
+
+.button-run span {
+  border-radius: 10px;
+  padding: 0.8em 1.3em;
+  padding-right: 1.2em;
+  text-shadow: 0px 0px 20px #4b4b4b;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  transition: all 0.3s;
+  background-color: rgb(29, 29, 29);
+  background-image: radial-gradient(at 95% 89%, rgb(15, 15, 15) 0px, transparent 50%), radial-gradient(at 0% 100%, rgb(17, 17, 17) 0px, transparent 50%), radial-gradient(at 0% 0%, rgb(29, 29, 29) 0px, transparent 50%);
+}
+
+.button-run:hover span {
+  background-color: rgb(26, 25, 25);
+}
+
+.button-run:hover {
+  transform: scale(1.1);
+}
+
+.button-run .button-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-conic-gradient(rgb(48, 47, 47) 0.0000001%, rgb(51, 51, 51) 0.000104%) 60% 60%/600% 600%;
+  filter: opacity(10%) contrast(105%);
+  -webkit-filter: opacity(10%) contrast(105%);
+}
+
+.button-run svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* Keep .button-run dark in light theme */
+html.light .button-run {
+  background: linear-gradient(180deg, rgb(56, 56, 56) 0%, rgb(36, 36, 36) 66%, rgb(41, 41, 41) 100%);
+  color: rgb(241, 241, 241);
+}
+
 .console-output {
   background-color: #010409;
   border: 1px solid #30363d;
   border-radius: 5px;
   margin-top: 1rem;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
+  /* smaller padding when collapsed */
   font-family: 'Courier New', Courier, monospace;
-  min-height: 70px;
+  /* start collapsed: small height and hide overflow */
+  max-height: 3.2rem;
+  overflow: hidden;
+  transition: max-height 320ms ease, padding 320ms ease;
 }
 
 .console-output .output-text {
@@ -144,21 +300,994 @@ footer {
   font-family: Arial, sans-serif;
 }
 
+/* Expanded state: allow the console to grow when content exists */
+.console-output.expanded {
+  padding: 1rem;
+  max-height: 400px;
+  /* generous max height to allow content without immediate scrollbar */
+  overflow: auto;
+}
+
 .cursor {
   display: inline-block;
   background-color: #c9d1d9;
   width: 8px;
   height: 1.2em;
-  animation: blink 1s step-end infinite;
+  /* disable blinking to avoid layout shifts */
+  animation: none !important;
   vertical-align: bottom;
 }
 
 @keyframes blink {
+
   from,
   to {
     background-color: transparent;
   }
+
   50% {
     background-color: #c9d1d9;
   }
+}
+
+.uiverse-terminal .uiverse-card {
+  padding: 1rem;
+  overflow: hidden;
+  /* dark appearance applied universally so light mode uses the same look */
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  background-color: rgba(34, 34, 34, 0.75);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.45) inset;
+}
+
+.uiverse-terminal .uiverse-card {
+  box-sizing: border-box;
+  /* ensure padding/border don't expand width */
+  width: 100%;
+  max-width: 100%;
+}
+
+.uiverse-terminal .wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  z-index: 10;
+  border: 0.5px solid #525252;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.uiverse-terminal .wrap {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.uiverse-terminal .terminal {
+  display: flex;
+  flex-direction: column;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+.uiverse-terminal .head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  min-height: 40px;
+  padding-inline: 12px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  background-color: #202425;
+}
+
+.uiverse-terminal .title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 2.5rem;
+  user-select: none;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #8e8e8e;
+}
+
+.uiverse-terminal .title>svg {
+  height: 18px;
+  width: 18px;
+  margin-top: 2px;
+  color: #006adc;
+}
+
+.uiverse-terminal .copy_toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  border: 0.65px solid #c1c2c5;
+  margin-left: auto;
+  border-radius: 6px;
+  background-color: #202425;
+  color: #8e8e8e;
+  cursor: pointer;
+  transition: 400ms;
+}
+
+.uiverse-terminal .copy_toggle:hover {
+  transform: scale(1.1);
+}
+
+.uiverse-terminal .copy_toggle>svg {
+  width: 20px;
+  height: 20px;
+}
+
+.uiverse-terminal .copy_toggle:active>svg>path,
+.uiverse-terminal .copy_toggle:focus-within>svg>path {
+  /* disable clipboard-check animation (avoid layout shifts) */
+  animation: none;
+}
+
+.uiverse-terminal .body {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  /* keep overflow on inner pre only so the full terminal frame remains visible */
+  overflow: visible;
+  /* prevent vertical scrollbars inside the terminal frame */
+  overflow-y: hidden;
+  padding: 1rem;
+  line-height: 19px;
+  color: white;
+  background-color: black;
+}
+
+.uiverse-terminal .pre {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-wrap: nowrap;
+  white-space: nowrap;
+  /* keep the whole command on one line */
+  background-color: transparent;
+  overflow-x: auto;
+  /* allow long command to scroll horizontally instead of growing */
+  overflow-y: hidden;
+  /* remove vertical scroll */
+  -webkit-overflow-scrolling: touch;
+  min-width: 0;
+  /* allow pre to shrink inside grid cell */
+  box-sizing: border-box;
+  font-size: 16px;
+  width: 100%;
+  /* ensure pre never grows tall and creates vertical scrollbars */
+  max-height: 2.2em;
+  padding-top: 0.15rem;
+  padding-bottom: 0.15rem;
+}
+
+/* subtle custom horizontal scrollbar for the terminal command line */
+.uiverse-terminal .pre {
+  /* Show a thin scrollbar in modern browsers while keeping the dark theme */
+  -ms-overflow-style: auto;
+  /* IE and old Edge: show default */
+  scrollbar-width: thin;
+  /* Firefox: thin scrollbar */
+  /* Firefox thumb and track colors (thumb then track) */
+  scrollbar-color: rgba(255, 255, 255, 0.12) rgba(255, 255, 255, 0.04);
+}
+
+.uiverse-terminal .pre::-webkit-scrollbar {
+  height: 8px;
+  /* small horizontal scrollbar */
+}
+
+/* ---------- Header search component (pill design) ---------- */
+.header-search {
+  position: absolute;
+  left: 1.5rem;
+  bottom: 0.75rem;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+}
+
+.header-search-checkbox {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 1px;
+  height: 1px;
+}
+
+.header-search .mainbox {
+  box-sizing: border-box;
+  position: relative;
+  width: 300px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  border-radius: 9px;
+  background: linear-gradient(180deg, #0b0b0b, #0f0f0f);
+  border: 2px solid rgba(190, 190, 190, 0.783);
+  padding: 10px 8px 10px 2px;
+  transition: all 220ms ease;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.header-search .search_input {
+  flex: 1 1 auto;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: rgba(201, 209, 217, 0.9);
+  text-align: center;
+  font-size: 1.05rem;
+  padding: 0 10px;
+}
+
+.header-search .search_input::placeholder {
+  color: rgba(201, 209, 217, 0.343);
+  text-align: right;
+}
+
+.header-search .iconContainer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  margin-left: 2px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0);
+}
+
+.header-search .iconContainer .search_icon {
+  fill: rgba(201, 209, 217, 0.84);
+  width: 15px;
+  height: 15px
+}
+
+/* collapsed state for small screens */
+@media (max-width: 720px) {
+  .header-search .mainbox {
+    width: 220px;
+  }
+}
+
+@media (max-width: 520px) {
+  .header-search {
+    left: auto;
+    right: 1rem;
+  }
+
+  .header-search .mainbox {
+    width: 160px;
+  }
+
+  .header-search .search_input {
+    font-size: 0.95rem;
+  }
+}
+
+/* theme adjustments */
+html.light .header-search .mainbox {
+  background: linear-gradient(180deg, #ffffff, #fcfcfc);
+  border-color: rgba(2, 4, 15, 0.556);
+  box-shadow: 0 2px 8px rgba(2, 6, 23, 0.06);
+}
+
+html.light .header-search .iconContainer {
+  background: rgba(2, 6, 23, 0);
+  border-color: rgba(2, 6, 23, 0.04);
+}
+
+html.light .header-search .iconContainer .search_icon {
+  fill: rgba(0, 0, 0, 0.712);
+}
+
+html.light .header-search .search_input::placeholder {
+  color: rgba(66, 66, 66, 0.528);
+}
+
+html.light .header-search .search_input {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+/* Suggest Improvement button style (namespaced .button) */
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3px 15px;
+  gap: 12px;
+  background-color: #181717;
+  outline: 3px #181717 solid;
+  border-radius: 9px;
+  border: 1px solid whitesmoke;
+  cursor: pointer;
+  transition: 400ms;
+}
+
+.button .text {
+  color: white;
+  font-weight: 700;
+  font-size: 0.98em;
+  transition: 400ms;
+}
+
+.button svg path {
+  transition: 400ms;
+}
+
+.button:hover {
+  background-color: transparent;
+  transform: scale(1.1);
+  border: 1px solid greenyellow;
+}
+
+.button:hover .text {
+  color: greenyellow;
+}
+
+.button:hover svg path {
+  fill: greenyellow;
+}
+
+/* Make sure .button works with dark/light themes */
+html.light .button {
+  background-color: #fff;
+}
+
+html.light .button .text {
+  color: #061017;
+}
+
+html.light .button svg path {
+  fill: #061017;
+}
+
+/* Move theme toggle to bottom-right of the header */
+.theme-switch {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 0.75rem;
+  z-index: 70;
+}
+
+/* On very small screens, move the theme toggle to the top-right to avoid colliding with the search */
+@media (max-width: 520px) {
+  .theme-switch {
+    top: 0.75rem;
+    bottom: auto;
+    right: 1rem;
+  }
+}
+
+.uiverse-terminal .pre::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 999px;
+}
+
+.uiverse-terminal .pre::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  /* padding effect */
+}
+
+.uiverse-terminal .pre::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.uiverse-terminal .pre code:nth-child(1) {
+  color: #575757;
+}
+
+.uiverse-terminal .pre code:nth-child(2) {
+  color: #e34ba9;
+}
+
+.uiverse-terminal .cmd {
+  /* use inline-flex so we can center the command vertically inside the .pre bar */
+  display: inline-flex;
+  align-items: center;
+  /* vertically center contents */
+  justify-content: flex-start;
+  position: relative;
+  /* fill the available height of the .pre row so centering is consistent */
+  height: 100%;
+  line-height: 1;
+  /* normalize line height for consistent centering */
+  min-width: 0;
+  /* allow cmd to shrink inside container */
+  padding: 0;
+  /* avoid extra vertical padding that can offset centering */
+  vertical-align: middle;
+  /* help with inline baseline alignment when needed */
+}
+
+.uiverse-terminal .cmd::before {
+  /* no pseudo-element content — command is rendered directly in DOM */
+  content: none !important;
+  display: none !important;
+}
+
+.uiverse-terminal .cmd::after {
+  content: "";
+  position: relative;
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  background-color: transparent;
+  border-right: 0.15em solid #e34ba9;
+  /* cursor animation disabled */
+  animation: none;
+}
+
+/* remove caret/visual effects: show only the static command text */
+.uiverse-terminal .cmd::after {
+  display: none !important;
+  border-right: none !important;
+}
+
+/* hide the demo/output cursor element so there's no blinking or extra height */
+.uiverse-terminal .cursor,
+.cursor {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Scoped hero button styles (header) */
+.hero-button-wrap {
+  margin-top: 1rem;
+}
+
+.hero-button-wrap .hero-star-btn {
+  position: relative;
+  padding: 12px 35px;
+  background: #000000;
+  font-size: 17px;
+  font-weight: 600;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 0 #ffffffd9;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.hero-button-wrap .hero-star-btn .fil0 {
+  fill: #fffdef;
+}
+
+.hero-button-wrap .star-1,
+.hero-button-wrap .star-2,
+.hero-button-wrap .star-3,
+.hero-button-wrap .star-4,
+.hero-button-wrap .star-5,
+.hero-button-wrap .star-6 {
+  position: absolute;
+  width: 15px;
+  height: auto;
+  filter: drop-shadow(0 0 0 #fffdef);
+  z-index: -5;
+  transition: all 0.8s cubic-bezier(0, 0.4, 0, 1.01);
+}
+
+.hero-button-wrap .star-1 {
+  top: 20%;
+  left: 20%;
+  width: 25px;
+}
+
+.hero-button-wrap .star-2 {
+  top: 45%;
+  left: 45%;
+  width: 15px;
+}
+
+.hero-button-wrap .star-3 {
+  top: 40%;
+  left: 40%;
+  width: 5px;
+}
+
+.hero-button-wrap .star-4 {
+  top: 20%;
+  left: 40%;
+  width: 8px;
+}
+
+.hero-button-wrap .star-5 {
+  top: 25%;
+  left: 45%;
+  width: 15px;
+}
+
+.hero-button-wrap .star-6 {
+  top: 5%;
+  left: 50%;
+  width: 5px;
+}
+
+.hero-button-wrap .hero-star-btn:hover {
+  background: transparent;
+  color: #fff1e7;
+  box-shadow: 0 0 25px #ffede0d9;
+}
+
+.hero-button-wrap .hero-star-btn:hover .star-1 {
+  top: -80%;
+  left: -30%;
+  z-index: 2;
+  filter: drop-shadow(0 0 10px #fffdef);
+}
+
+.hero-button-wrap .hero-star-btn:hover .star-2 {
+  top: -25%;
+  left: 10%;
+  z-index: 2;
+  filter: drop-shadow(0 0 10px #fffdef);
+}
+
+.hero-button-wrap .hero-star-btn:hover .star-3 {
+  top: 55%;
+  left: 25%;
+  z-index: 2;
+  filter: drop-shadow(0 0 10px #fffdef);
+}
+
+.hero-button-wrap .hero-star-btn:hover .star-4 {
+  top: 30%;
+  left: 80%;
+  z-index: 2;
+  filter: drop-shadow(0 0 10px #fffdef);
+}
+
+.hero-button-wrap .hero-star-btn:hover .star-5 {
+  top: 25%;
+  left: 115%;
+  z-index: 2;
+  filter: drop-shadow(0 0 10px #fffdef);
+}
+
+.hero-button-wrap .hero-star-btn:hover .star-6 {
+  top: 5%;
+  left: 60%;
+  z-index: 2;
+  filter: drop-shadow(0 0 10px #fffdef);
+}
+
+
+
+/* Header layout: logo left, star button right */
+.site-header {
+  padding: 1.5rem 1rem;
+  background: #000000;
+  --gap: 5em;
+  --line: 1px;
+  --color: rgba(255, 255, 255, 0.2);
+
+  background-image: linear-gradient(-90deg,
+      transparent calc(var(--gap) - var(--line)),
+      var(--color) calc(var(--gap) - var(--line) + 1px),
+      var(--color) var(--gap)),
+    linear-gradient(0deg,
+      transparent calc(var(--gap) - var(--line)),
+      var(--color) calc(var(--gap) - var(--line) + 1px),
+      var(--color) var(--gap));
+  background-size: var(--gap) var(--gap);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.site-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.site-logo {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #c9d1d9;
+  user-select: none;
+}
+
+.site-header-bottom {
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+@media (max-width: 720px) {
+  .site-header-top {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-button-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+
+  .site-header-bottom {
+    text-align: center;
+  }
+}
+
+/* Theme toggle (scoped) */
+.theme-switch {
+  margin-top: 0.75rem;
+  display: flex;
+  justify-content: center;
+}
+
+.theme-switch .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  border: 1px solid rgba(245, 245, 245, 0.564);
+  border-radius: 25px;
+}
+
+.theme-switch #theme-toggle {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.theme-switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #2196f3;
+  transition: 0.4s;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.theme-switch .sun-moon {
+  position: absolute;
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: yellow;
+  transition: 0.4s;
+}
+
+.theme-switch #theme-toggle:checked+.slider {
+  background-color: black;
+}
+
+.theme-switch #theme-toggle:focus+.slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+.theme-switch #theme-toggle:checked+.slider .sun-moon {
+  transform: translateX(26px);
+  background-color: white;
+  animation: rotate-center 0.6s ease-in-out both;
+}
+
+.theme-switch .moon-dot {
+  opacity: 0;
+  transition: 0.4s;
+  fill: gray;
+}
+
+.theme-switch #theme-toggle:checked+.slider .moon-dot {
+  opacity: 1;
+}
+
+.theme-switch .slider.round {
+  border-radius: 34px;
+}
+
+.theme-switch .slider.round .sun-moon {
+  border-radius: 50%;
+}
+
+.theme-switch #moon-dot-1 {
+  left: 10px;
+  top: 3px;
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  z-index: 4;
+}
+
+.theme-switch #moon-dot-2 {
+  left: 2px;
+  top: 10px;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  z-index: 4;
+}
+
+.theme-switch #moon-dot-3 {
+  left: 16px;
+  top: 18px;
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  z-index: 4;
+}
+
+.theme-switch #light-ray-1 {
+  left: -8px;
+  top: -8px;
+  position: absolute;
+  width: 43px;
+  height: 43px;
+  z-index: -1;
+  fill: white;
+  opacity: 10%;
+}
+
+.theme-switch #light-ray-2 {
+  left: -50%;
+  top: -50%;
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  z-index: -1;
+  fill: white;
+  opacity: 10%;
+}
+
+.theme-switch #light-ray-3 {
+  left: -18px;
+  top: -18px;
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  z-index: -1;
+  fill: white;
+  opacity: 10%;
+}
+
+.theme-switch .cloud-light {
+  position: absolute;
+  fill: #eee;
+  animation-name: cloud-move;
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+}
+
+.theme-switch .cloud-dark {
+  position: absolute;
+  fill: #ccc;
+  animation-name: cloud-move;
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+  animation-delay: 1s;
+}
+
+.theme-switch #cloud-1 {
+  left: 30px;
+  top: 15px;
+  width: 40px;
+}
+
+.theme-switch #cloud-2 {
+  left: 44px;
+  top: 10px;
+  width: 20px;
+}
+
+.theme-switch #cloud-3 {
+  left: 18px;
+  top: 24px;
+  width: 30px;
+}
+
+.theme-switch #cloud-4 {
+  left: 36px;
+  top: 18px;
+  width: 40px;
+}
+
+.theme-switch #cloud-5 {
+  left: 48px;
+  top: 14px;
+  width: 20px;
+}
+
+.theme-switch #cloud-6 {
+  left: 22px;
+  top: 26px;
+  width: 30px;
+}
+
+@keyframes cloud-move {
+  0% {
+    transform: translateX(0px);
+  }
+
+  40% {
+    transform: translateX(4px);
+  }
+
+  80% {
+    transform: translateX(-4px);
+  }
+
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+.theme-switch .stars {
+  transform: translateY(-32px);
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.theme-switch .star {
+  fill: white;
+  position: absolute;
+  transition: 0.4s;
+  animation-name: star-twinkle;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+.theme-switch #theme-toggle:checked+.slider .stars {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.theme-switch #star-1 {
+  width: 20px;
+  top: 2px;
+  left: 3px;
+  animation-delay: 0.3s;
+}
+
+.theme-switch #star-2 {
+  width: 6px;
+  top: 16px;
+  left: 3px;
+}
+
+.theme-switch #star-3 {
+  width: 12px;
+  top: 20px;
+  left: 10px;
+  animation-delay: 0.6s;
+}
+
+.theme-switch #star-4 {
+  width: 18px;
+  top: 0px;
+  left: 18px;
+  animation-delay: 1.3s;
+}
+
+@keyframes star-twinkle {
+  0% {
+    transform: scale(1);
+  }
+
+  40% {
+    transform: scale(1.2);
+  }
+
+  80% {
+    transform: scale(0.8);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Light theme overrides when <html> has class 'light' */
+html.light body {
+  background-color: whitesmoke;
+  color: #0b1220;
+}
+
+html.light header,
+html.light footer {
+  background-color: #ffffff;
+  border-color: #e6e6e6;
+}
+
+html.light .site-logo {
+  color: #0b1220;
+}
+
+html.light a {
+  color: #0b5fff;
+}
+
+html.light .card {
+  background-color: #e8e7e7;
+  color: #0b1220;
+  border: 1px solid #c2c2c2;
+}
+
+html.light pre,
+html.light .card pre,
+html.light .uiverse-terminal .body {
+  background-color: #000000d3;
+  color: #eeeeee;
+  border-color: #e6e6e6;
+}
+
+html.light .console-output {
+  background-color: rgb(0, 0, 0);
+  border-color: #e6e6e6;
+  color: #fefefe;
+}
+
+html.light .uiverse-terminal .head {
+  background-color: #f1f5f9;
+}
+
+html.light .uiverse-terminal .title {
+  color: #0e213c;
+}
+
+html.light .uiverse-terminal .copy_toggle {
+  background-color: #ffffff;
+  color: #1a2b47;
+  border-color: #e5e7eb;
+}
+
+html.light button {
+  background-color: transparent;
+}
+
+html.light button:hover {
+  background-color: transparent;
+}
+
+html.light .btn-demo {
+  background-color: #e5e7eb;
+  color: #0b1220;
+}
+
+html.light .cursor {
+  background-color: #0b1220;
+}
+
+/* Ensure scrollbar colors are readable in light mode */
+html.light .uiverse-terminal .pre::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+html.light .uiverse-terminal .pre::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+/* Tie site-header pattern color to theme */
+html.dark .site-header {
+  --color: rgba(255, 255, 255, 0.18);
+}
+
+html.light .site-header {
+  --color: rgba(0, 0, 0, 0.12);
 }
