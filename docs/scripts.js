@@ -1,4 +1,5 @@
 const showcase = document.getElementById("showcase");
+const searchInput = document.getElementById("searchInput");
 
 // scripts will be loaded from docs/scripts.json so contributors can edit JSON to add scripts
 let scripts = [];
