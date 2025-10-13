@@ -103,6 +103,7 @@ To add a new PowerShell script to the showcase, edit `docs/scripts.json` and add
 - demoOutput (string, optional) — the text that will be typed into the demo console
 
 Example entry:
+```
 {
   "name": "Clean Temp Folder",
   "description": "Remove old files from %TEMP%",
@@ -110,6 +111,7 @@ Example entry:
   "github": "https://github.com/your/repo/blob/main/clean-temp.ps1",
   "demoOutput": "Removed 42 files"
 }
+```
 
 Notes:
 - When testing locally, serve `docs/` over HTTP (e.g. `npx http-server docs`) because `fetch('scripts.json')` will fail on file://.
