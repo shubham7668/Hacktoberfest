@@ -92,6 +92,34 @@ This helps reviewers verify your work quickly and fairly.
 
 ---
 
+## ➕ How to add a new script (docs/scripts.json)
+
+To add a new PowerShell script to the showcase, edit `docs/scripts.json` and add an object with these fields:
+
+- name (string) — human friendly title  
+- description (string) — short summary of the script  
+- code (string) — the script body (use `\n` for new lines inside the JSON string)  
+- github (string, optional) — a link to the source or reference repo/file  
+- demoOutput (string, optional) — the text that will be typed into the demo console
+
+Example entry:
+```
+{
+  "name": "Clean Temp Folder",
+  "description": "Remove old files from %TEMP%",
+  "code": "Get-ChildItem $env:TEMP -Recurse | Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-30) } | Remove-Item -Force -Recurse",
+  "github": "https://github.com/your/repo/blob/main/clean-temp.ps1",
+  "demoOutput": "Removed 42 files"
+}
+```
+
+Notes:
+- When testing locally, serve `docs/` over HTTP (e.g. `npx http-server docs`) because `fetch('scripts.json')` will fail on file://.
+- Keep `code` as a single JSON string; escape newlines (`\n`) and quotes as needed.
+- Add meaningful descriptions and demoOutput to improve reviewer experience.
+
+---
+
 ## 📜 LICENSE
   
 This project is licensed under the [MIT License](https://github.com/shubham7668/Hacktoberfest/blob/main/LICENSE).  
