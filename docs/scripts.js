@@ -57,8 +57,8 @@ document.addEventListener('click', function(e) {
   const target = e.target;
 
   if (target.matches('.btn-copy')) {
-    const index = target.getAttribute('data-index');
-    const code = scripts[index].code;
+    const codeBlock = target.closest('.card').querySelector('pre code');
+    const code = codeBlock.textContent;
     navigator.clipboard.writeText(code).then(() => {
         target.textContent = '✅ Copied!';
         setTimeout(() => { target.textContent = '📋 Copy'; }, 2000);
@@ -105,8 +105,8 @@ function displayFilteredScripts(filtered) {
     card.innerHTML = `
       <h3>${script.name}</h3>
       <p>${script.description}</p>
-      <pre><code>${script.code.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>
-      
+      <pre><code class="language-powershell">${script.code.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>
+
       <div class="console-output" data-index="${index}">
         <pre class="output-text"></pre>
       </div>
@@ -119,6 +119,7 @@ function displayFilteredScripts(filtered) {
     `;
     showcase.appendChild(card);
   });
+  Prism.highlightAll();
 }
 
 searchInput.addEventListener("input", e => {

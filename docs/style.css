@@ -49,10 +49,11 @@ main {
   flex-grow: 1;
 }
 
+/* This styles the container for BOTH the highlighted code and the demo output */
 pre {
   background-color: #0d1117;
   border: 1px solid #30363d;
-  border-radius: 5px;
+  border-radius: 8px;
   padding: 1rem;
   white-space: pre-wrap;
   word-break: break-all;
@@ -253,7 +254,7 @@ footer {
     width: 100%;
   }
 
-  theme-toggle {
+  .theme-toggle {
     width: 42px;
     height: 42px;
     top: 15px;
@@ -278,3 +279,11 @@ footer {
   }
 }
 
+pre[class*="language-"] > code[class*="language-"] {
+    white-space: pre-wrap !important;
+    word-break: break-all !important;
+}
+
+.card pre code[class*="language-"] {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+}
