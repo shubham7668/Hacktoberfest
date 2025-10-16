@@ -25,16 +25,18 @@ function getCookie(name) {
 function initTheme() {
   const savedTheme = getCookie('theme');
   const themeToggle = document.getElementById("theme-toggle");
+  const darkTheme = document.getElementById('prism-dark-theme');
+  const lightTheme = document.getElementById('prism-light-theme');
   
   if (savedTheme === 'light') {
     document.body.classList.add('light-mode');
-    if (themeToggle) {
-      themeToggle.textContent = "☀️";
-    }
+    if (themeToggle) themeToggle.textContent = "☀️";
+    if (darkTheme) darkTheme.disabled = true;
+    if (lightTheme) lightTheme.disabled = false;
   } else {
-    if (themeToggle) {
-      themeToggle.textContent = "🌙";
-    }
+    if (themeToggle) themeToggle.textContent = "🌙";
+    if (darkTheme) darkTheme.disabled = false;
+    if (lightTheme) lightTheme.disabled = true;
   }
 }
 
@@ -57,8 +59,8 @@ document.addEventListener('click', function(e) {
   const target = e.target;
 
   if (target.matches('.btn-copy')) {
-    const index = target.getAttribute('data-index');
-    const code = scripts[index].code;
+    const codeBlock = target.closest('.card').querySelector('pre code');
+    const code = codeBlock.textContent;
     navigator.clipboard.writeText(code).then(() => {
         target.textContent = '✅ Copied!';
         setTimeout(() => { target.textContent = '📋 Copy'; }, 2000);
@@ -105,8 +107,8 @@ function displayFilteredScripts(filtered) {
     card.innerHTML = `
       <h3>${script.name}</h3>
       <p>${script.description}</p>
-      <pre><code>${script.code.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>
-      
+      <pre><code class="language-powershell">${script.code.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>
+
       <div class="console-output" data-index="${index}">
         <pre class="output-text"></pre>
       </div>
@@ -119,6 +121,7 @@ function displayFilteredScripts(filtered) {
     `;
     showcase.appendChild(card);
   });
+  Prism.highlightAll();
 }
 
 searchInput.addEventListener("input", e => {
@@ -134,9 +137,14 @@ const themeToggle = document.getElementById("theme-toggle");
 if (themeToggle) {
   themeToggle.addEventListener("click", () => {
     document.body.classList.toggle("light-mode");
+    const isLight = document.body.classList.contains("light-mode");
+
+    // Toggle PrismJS themes
+    document.getElementById('prism-dark-theme').disabled = isLight;
+    document.getElementById('prism-light-theme').disabled = !isLight;
     
-    // Save preference in cookie
-    if (document.body.classList.contains("light-mode")) {
+    // Save preference in cookie and update icon
+    if (isLight) {
       setCookie('theme', 'light', 365);
       themeToggle.textContent = "☀️";
     } else {

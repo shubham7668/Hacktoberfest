@@ -52,7 +52,7 @@ main {
 pre {
   background-color: #0d1117;
   border: 1px solid #30363d;
-  border-radius: 5px;
+  border-radius: 8px;
   padding: 1rem;
   white-space: pre-wrap;
   word-break: break-all;
@@ -212,7 +212,6 @@ footer {
 .light-mode header,
 .light-mode footer,
 .light-mode .card,
-.light-mode pre,
 .light-mode .console-output {
   background-color: #f2f2f2;
   border-color: #d0d7de;
@@ -253,7 +252,7 @@ footer {
     width: 100%;
   }
 
-  theme-toggle {
+  .theme-toggle {
     width: 42px;
     height: 42px;
     top: 15px;
@@ -278,3 +277,17 @@ footer {
   }
 }
 
+pre[class*="language-"] > code[class*="language-"] {
+    white-space: pre-wrap !important;
+    word-break: break-all !important;
+}
+
+.card pre code[class*="language-"] {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+}
+
+.light-mode pre[class*="language-"] {
+    background-color: #f6f8fa;
+    color: #24292e;
+    border-color: #d0d7de;
+}
