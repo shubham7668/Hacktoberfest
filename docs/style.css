@@ -569,7 +569,7 @@ html.light .button-run {
   font-size: 16px;
   width: 100%;
   /* ensure pre never grows tall and creates vertical scrollbars */
-  max-height: 2.2em;
+  /* max-height: 2.5em; */
   padding-top: 0.15rem;
   padding-bottom: 0.15rem;
 }
@@ -579,7 +579,7 @@ html.light .button-run {
   /* Show a thin scrollbar in modern browsers while keeping the dark theme */
   -ms-overflow-style: auto;
   /* IE and old Edge: show default */
-  scrollbar-width: thin;
+  scrollbar-width:thin;
   /* Firefox: thin scrollbar */
   /* Firefox thumb and track colors (thumb then track) */
   scrollbar-color: rgba(255, 255, 255, 0.12) rgba(255, 255, 255, 0.04);
@@ -857,6 +857,7 @@ html.light .button svg path {
 
 .uiverse-terminal .pre code:nth-child(1) {
   color: #575757;
+  padding: 1em 0 0 0;
 }
 
 .uiverse-terminal .pre code:nth-child(2) {

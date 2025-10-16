@@ -7,7 +7,8 @@ let scripts = [];
 function escapeHtml(str) {
   return String(str)
     .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
+    .replace(/>/g, "&gt;")
+    .replace(/&/g, "&amp;");
 }
 
 function renderScripts() {
@@ -37,7 +38,7 @@ function renderScripts() {
             </hgroup>
 
             <div class="body">
-              <pre class="pre"><code>-&nbsp;</code><code class="cmd">${escapeHtml(script.code || "")}</code></pre>
+              <pre class="pre"><code class="language-powershell">${escapeHtml(script.code || "")}</code></pre>
             </div>
           </div>
         </div>
@@ -68,6 +69,14 @@ function renderScripts() {
 
     showcase.appendChild(card);
   });
+    // after DOM insertion, run highlight.js to apply syntax highlighting
+    try {
+      if (window.hljs && typeof window.hljs.highlightAll === "function") {
+        window.hljs.highlightAll();
+      }
+    } catch (e) {
+      console.warn("Highlight.js failed:", e);
+    }
 }
 
 // load scripts.json from the same folder as this script
