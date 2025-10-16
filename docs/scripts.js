@@ -25,16 +25,18 @@ function getCookie(name) {
 function initTheme() {
   const savedTheme = getCookie('theme');
   const themeToggle = document.getElementById("theme-toggle");
+  const darkTheme = document.getElementById('prism-dark-theme');
+  const lightTheme = document.getElementById('prism-light-theme');
   
   if (savedTheme === 'light') {
     document.body.classList.add('light-mode');
-    if (themeToggle) {
-      themeToggle.textContent = "☀️";
-    }
+    if (themeToggle) themeToggle.textContent = "☀️";
+    if (darkTheme) darkTheme.disabled = true;
+    if (lightTheme) lightTheme.disabled = false;
   } else {
-    if (themeToggle) {
-      themeToggle.textContent = "🌙";
-    }
+    if (themeToggle) themeToggle.textContent = "🌙";
+    if (darkTheme) darkTheme.disabled = false;
+    if (lightTheme) lightTheme.disabled = true;
   }
 }
 
@@ -135,9 +137,14 @@ const themeToggle = document.getElementById("theme-toggle");
 if (themeToggle) {
   themeToggle.addEventListener("click", () => {
     document.body.classList.toggle("light-mode");
+    const isLight = document.body.classList.contains("light-mode");
+
+    // Toggle PrismJS themes
+    document.getElementById('prism-dark-theme').disabled = isLight;
+    document.getElementById('prism-light-theme').disabled = !isLight;
     
-    // Save preference in cookie
-    if (document.body.classList.contains("light-mode")) {
+    // Save preference in cookie and update icon
+    if (isLight) {
       setCookie('theme', 'light', 365);
       themeToggle.textContent = "☀️";
     } else {

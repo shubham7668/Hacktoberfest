@@ -49,7 +49,6 @@ main {
   flex-grow: 1;
 }
 
-/* This styles the container for BOTH the highlighted code and the demo output */
 pre {
   background-color: #0d1117;
   border: 1px solid #30363d;
@@ -213,7 +212,6 @@ footer {
 .light-mode header,
 .light-mode footer,
 .light-mode .card,
-.light-mode pre,
 .light-mode .console-output {
   background-color: #f2f2f2;
   border-color: #d0d7de;
@@ -286,4 +284,10 @@ pre[class*="language-"] > code[class*="language-"] {
 
 .card pre code[class*="language-"] {
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+}
+
+.light-mode pre[class*="language-"] {
+    background-color: #f6f8fa;
+    color: #24292e;
+    border-color: #d0d7de;
 }
